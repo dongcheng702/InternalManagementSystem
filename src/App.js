@@ -31,6 +31,7 @@ import MainLayout from "./components/MainLayout";
 import EmployeeList from "./components/EmployeeList";
 import WorkHourList from "./components/WorkHourList";
 import CostManagement from "./components/CostManagement";
+import SalaryMgt from "./components/SalaryMgt";
 import "./assets/css/global.css";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/react/EmployeeList" element={<EmployeeList />} />
           <Route path="/react/WorkHourList" element={<WorkHourList />} />
           <Route path="/react/CostManagement" element={<CostManagement />} />
+          <Route path="/react/SalaryMgt" element={<SalaryMgt />} />
         </Route>
       </Routes>
     </Router>
