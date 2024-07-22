@@ -5,7 +5,7 @@ import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("passaword");
+  const [password, setPassword] = useState("password");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
