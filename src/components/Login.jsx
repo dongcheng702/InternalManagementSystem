@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("password");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/react/login', { username, password });
+      const response = await axios.post("http://localhost:8080/react/login", {
+        username,
+        password,
+      });
       const result = response.data;
       if (result.status) {
-        navigate('/menu');
+        navigate("/menu");
       } else {
         alert(result.message);
       }
     } catch (error) {
-      console.error('There was an error logging in!', error);
+      console.error("There was an error logging in!", error);
     }
   };
 
@@ -47,7 +50,9 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </div>
   );
