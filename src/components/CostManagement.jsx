@@ -133,7 +133,7 @@ const ExpenseList = () => {
           placeholder="最初日を選択してください"
           value={paramFirstDay}
           onChange={(e) => setParamFirstDay(e.target.value)}
-        /><span></span> ~
+        /><span>~</span> 
         <input
           type="date"
           placeholder="最終日を選択してください"
