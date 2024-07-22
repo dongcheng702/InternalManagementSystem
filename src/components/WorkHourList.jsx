@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './WorkHourList.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const ShainIchiran = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [paramName, setParamName] = useState('');
-  const [paramBirthday, setParamBirthday] = useState('');
-  const [businessError, setBusinessError] = useState('');
+  const [paramName, setParamName] = useState("");
+  const [paramBirthday, setParamBirthday] = useState("");
+  const [businessError, setBusinessError] = useState("");
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/react/WorkHourList', {
-        params: {
-          name: paramName,
-          birthday: paramBirthday
+      const response = await axios.get(
+        "http://localhost:8080/react/WorkHourList",
+        {
+          params: {
+            name: paramName,
+            birthday: paramBirthday,
+          },
         }
-      });
+      );
 
       if (response.data.error) {
         setBusinessError(response.data.error);
         setEmployees([]);
       } else {
         setEmployees(response.data.results);
-        setBusinessError('');
+        setBusinessError("");
       }
 
       setLoading(false);
@@ -62,7 +64,9 @@ const ShainIchiran = () => {
           value={paramBirthday}
           onChange={(e) => setParamBirthday(e.target.value)}
         />
-        <button id="btn" onClick={fetchEmployees}>再検索</button>
+        <button id="btn" onClick={fetchEmployees}>
+          再検索
+        </button>
       </div>
       <div>
         <table>
@@ -75,7 +79,7 @@ const ShainIchiran = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map(employee => (
+            {employees.map((employee) => (
               <tr key={employee.employeeId}>
                 <td>{employee.employeeId}</td>
                 <td>{employee.name}</td>
