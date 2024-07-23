@@ -14,6 +14,7 @@ const ExpenseList = () => {
   const [paramPosition, setParamPosition] = useState('');
   const [businessError, setBusinessError] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
+  // const Navigate = useNavigate();
 
   const handleSelectAll = (event) => {
     if (event.target.checked) {
@@ -22,6 +23,12 @@ const ExpenseList = () => {
     } else {
       setSelectedRows([]);
     }
+  };
+
+  const gotoRqt = () => {
+    console.log("gotoRqt");
+    // Navigate('/react/RqtExpense');
+
   };
 
   const handleSelectRow = (event, id) => {
@@ -91,68 +98,67 @@ const ExpenseList = () => {
             />
           </div>
         </div>
-        <div className="search-fields">
-          <div className="search-bar">
-            <span className="search">部門:</span>
-            <select
-              value={paramPosition}
-              onChange={(e) => setParamPosition(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="1">部門1</option>
-              <option value="2">部門2</option>
-              <option value="3">部門3</option>
-            </select>
+        <div className="search-bar">
+          <span className="search">部門:</span>
+          <select className='search-select'
+            value={paramPosition}
+            onChange={(e) => setParamPosition(e.target.value)}
+          >
+            <option value=""></option>
+            <option value="1">部門1</option>
+            <option value="2">部門2</option>
+            <option value="3">部門3</option>
+          </select>
 
-            <span className="search">職務:</span>
-            <select
-              value={paramDepartment}
-              onChange={(e) => setParamDepartment(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="1">職務1</option>
-              <option value="2">職務2</option>
-              <option value="3">職務3</option>
-            </select>
+          <span className="search">職務:</span>
+          <select className='search-select'
+            value={paramDepartment}
+            onChange={(e) => setParamDepartment(e.target.value)}
+          >
+            <option value=""></option>
+            <option value="1">職務1</option>
+            <option value="2">職務2</option>
+            <option value="3">職務3</option>
+          </select>
 
-            <span className="search">処理状態:</span>
-            <select
-              value={paramDepartment}
-              onChange={(e) => setParamDepartment(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="1">承認まち</option>
-              <option value="2">承認済み</option>
-              <option value="3">承認不可</option>
-              <option value="3">清算中</option>
-              <option value="3">清算済み</option>
-            </select>
-          </div>
+          <span className="search">処理状態:</span>
+          <select className='search-select'
+            value={paramDepartment}
+            onChange={(e) => setParamDepartment(e.target.value)}
+          >
+            <option value=""></option>
+            <option value="1">承認まち</option>
+            <option value="2">承認済み</option>
+            <option value="3">承認不可</option>
+            <option value="3">清算中</option>
+            <option value="3">清算済み</option>
+          </select>
         </div>
 
-        <div className='margin-bottom-20'>
-          <div className='search-label'>
-            <span className="search">日付指定:</span>
-            <input
-              type="date"
-              placeholder="最初日を選択してください"
-              value={paramFirstDay}
-              onChange={(e) => setParamFirstDay(e.target.value)}
-            /><span>~</span>
-            <input
-              type="date"
-              placeholder="最終日を選択してください"
-              value={paramLastDay}
-              onChange={(e) => setParamLastDay(e.target.value)}
-            />
-
+        <div className='search-bar'>
+          <div className='search-fields'>
+            <div className='search-label'>
+              <span className="search">日付指定:</span>
+              <input
+                type="date"
+                placeholder="最初日を選択してください"
+                value={paramFirstDay}
+                onChange={(e) => setParamFirstDay(e.target.value)}
+              /><span>~</span>
+              <input
+                type="date"
+                placeholder="最終日を選択してください"
+                value={paramLastDay}
+                onChange={(e) => setParamLastDay(e.target.value)}
+              />
+            </div>
           </div>
         </div>
 
 
         <div className='margin-bottom-20'>
           <button id="btn" onClick={fetchEmployees}>検索</button>
-          <button id="btn" className='margin-left-50' onClick={fetchEmployees}>申請</button>
+          <button id="btn" className='margin-left-50' onClick={gotoRqt}>申請</button>
           <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
         </div>
       </div>
@@ -190,16 +196,16 @@ const ExpenseList = () => {
                   />
                 </td>
 
-                <td>{employee.employeeId}</td>
-                <td>{employee.name}</td>
-                <td>{employee.mail}</td>
-                <td>{employee.birthday}</td>
+                <td>ヤマダ電機</td>
+                <td>ビックカメラ</td>
+                <td>ヨドバシカメラ</td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>部門1</td>
+                <td>職務1</td>
+                <td>2024-07-23</td>
+                <td>30000</td>
+                <td>承認まち</td>
+                <td>30000</td>
                 <td>
                   <button>取り消し</button>
                   <button>承認</button>
