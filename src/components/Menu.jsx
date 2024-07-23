@@ -62,6 +62,9 @@ const Menu = () => {
         {
           label: "給料管理",
           icon: "pi pi-fw pi-file",
+          command: () => {
+            navigate("/react/SalaryMgt");
+          },
         },
       ],
     },
