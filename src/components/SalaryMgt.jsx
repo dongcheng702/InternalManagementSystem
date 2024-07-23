@@ -13,6 +13,7 @@ const ShainIchiran = () => {
   const [paramDepartment, setParamDepartment] = useState("");
   const [paramPosition, setParamPosition] = useState("");
   const [paramID, setParamID] = useState("");
+
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
@@ -115,106 +116,118 @@ const ShainIchiran = () => {
 
       <div>
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="Tab 1" key="1">
-            Content of Tab Pane 1
+          <Tabs.TabPane tab="未作成" key="1">
+            <table className="kr-table">
+              <thead>
+                <tr>
+                  <th>社員ID</th>
+                  <th>社員名</th>
+                  <th>勤怠</th>
+                  <th>支給</th>
+                  <th>控除</th>
+                  <th>その他</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employees.map((employee) => (
+                  <tr key={employee.employeeId}>
+                    <td>
+                      <div className="description-list">
+                        <dl>
+                          <dt>{employee.employeeId}</dt>
+                        </dl>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="description-list">
+                        <dl>
+                          <dt>{employee.name}</dt>
+                        </dl>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="description-list">
+                        <dl className="search-group">
+                          <dt>出勤日数</dt>
+                          <dd>{20}</dd>
+                          <dt>勤務時間</dt>
+                          <dd>{"168:00:00"}</dd>
+                        </dl>
+                        <dl className="search-group">
+                          <dd>{20}</dd>
+                          <dd>{"168:00:00"}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="description-list">
+                        <dl>
+                          <dt>基本給料</dt>
+                          <dd>{500000}</dd>
+                          <dt>残業手当</dt>
+                          <dd>{0}</dd>
+                          <dt>住宅手当</dt>
+                          <dd>{0}</dd>
+                          <dt>通勤手当</dt>
+                          <dd>{10000}</dd>
+                          <dt>その他手当</dt>
+                          <dd>{0}</dd>
+                          <dt>支払総額</dt>
+                          <dd>{510000}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="description-list">
+                        <dl>
+                          <dt>健康保険料</dt>
+                          <dd>{24900}</dd>
+                          <dt>厚生年金保険料</dt>
+                          <dd>{44570}</dd>
+                          <dt>雇用保険料</dt>
+                          <dd>{2040}</dd>
+                          <dt>社会保険料合計</dt>
+                          <dd>{71510}</dd>
+                          <dt>源泉所得税</dt>
+                          <dd>{19690}</dd>
+                          <dt>控除額合計</dt>
+                          <dd>{91200}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="description-list">
+                        <dl>
+                          <dt>差引支払額</dt>
+                          <dd>{418800}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Tab 2" key="2">
-            Content of Tab Pane 2
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="Tab 3" key="3">
-            Content of Tab Pane 3<Tag color="magenta">magenta</Tag>
+          <Tabs.TabPane tab="作成済み" key="2">
+            <table className="kr-table">
+              <thead>
+                <tr>
+                  <th>社員ID</th>
+                  <th>社員名</th>
+                  <th>勤怠</th>
+                  <th>支給</th>
+                  <th>控除</th>
+                  <th>その他</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employees.map((employee) => (
+                  <tr key={employee.employeeId}></tr>
+                ))}
+              </tbody>
+            </table>
           </Tabs.TabPane>
         </Tabs>
-        <table className="kr-table">
-          <thead>
-            <tr>
-              <th>社員ID</th>
-              <th>社員名</th>
-              <th>勤怠</th>
-              <th>支給</th>
-              <th>控除</th>
-              <th>その他</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees.map((employee) => (
-              <tr key={employee.employeeId}>
-                <td>
-                  <div className="description-list">
-                    <dl>
-                      <dt>{employee.employeeId}</dt>
-                    </dl>
-                  </div>
-                </td>
-                <td>
-                  <div className="description-list">
-                    <dl>
-                      <dt>{employee.name}</dt>
-                    </dl>
-                  </div>
-                </td>
-                <td>
-                  <div className="description-list">
-                    <dl className="search-group">
-                      <dt>出勤日数</dt>
-                      <dd>{20}</dd>
-                      <dt>勤務時間</dt>
-                      <dd>{"168:00:00"}</dd>
-                    </dl>
-                    <dl className="search-group">
-                      <dd>{20}</dd>
-                      <dd>{"168:00:00"}</dd>
-                    </dl>
-                  </div>
-                </td>
-                <td>
-                  <div className="description-list">
-                    <dl>
-                      <dt>基本給料</dt>
-                      <dd>{500000}</dd>
-                      <dt>残業手当</dt>
-                      <dd>{0}</dd>
-                      <dt>住宅手当</dt>
-                      <dd>{0}</dd>
-                      <dt>通勤手当</dt>
-                      <dd>{10000}</dd>
-                      <dt>その他手当</dt>
-                      <dd>{0}</dd>
-                      <dt>支払総額</dt>
-                      <dd>{510000}</dd>
-                    </dl>
-                  </div>
-                </td>
-                <td>
-                  <div className="description-list">
-                    <dl>
-                      <dt>健康保険料</dt>
-                      <dd>{24900}</dd>
-                      <dt>厚生年金保険料</dt>
-                      <dd>{44570}</dd>
-                      <dt>雇用保険料</dt>
-                      <dd>{2040}</dd>
-                      <dt>社会保険料合計</dt>
-                      <dd>{71510}</dd>
-                      <dt>源泉所得税</dt>
-                      <dd>{19690}</dd>
-                      <dt>控除額合計</dt>
-                      <dd>{91200}</dd>
-                    </dl>
-                  </div>
-                </td>
-                <td>
-                  <div className="description-list">
-                    <dl>
-                      <dt>差引支払額</dt>
-                      <dd>{418800}</dd>
-                    </dl>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );
