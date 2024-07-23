@@ -32,6 +32,10 @@ import EmployeeList from "./components/EmployeeList";
 import WorkHourList from "./components/WorkHourList";
 import CostManagement from "./components/CostManagement";
 import "./assets/css/global.css";
+import CustMgt from './components/CustMgt';
+import CustMgtDetail from './components/CustMgtDetail';
+import CustBankMgt from './components/CustBankMgt';
+import CustBankMgtDetail from './components/CustBankMgtDetail';
 
 function App() {
   return (
@@ -44,6 +48,10 @@ function App() {
           <Route path="/react/EmployeeList" element={<EmployeeList />} />
           <Route path="/react/WorkHourList" element={<WorkHourList />} />
           <Route path="/react/CostManagement" element={<CostManagement />} />
+          <Route path="/react/CustMgt" element={<CustMgt />} />
+          <Route path="/react/CustMgtDetail" element={<CustMgtDetail />} />
+          <Route path="/react/CustBankMgt" element={<CustBankMgt />} />
+          <Route path="/react/CustBankMgtDetail" element={<CustBankMgtDetail />} />
         </Route>
       </Routes>
     </Router>

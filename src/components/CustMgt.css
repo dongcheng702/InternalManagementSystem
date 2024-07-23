@@ -1,0 +1,186 @@
+/* 设置整体布局和字体 */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* 设置容器 */
+.kokyaku-kanri {
+  max-width: 1200px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 标题样式 */
+.kokyaku-kanri h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.kokyaku-kanri h4 {
+  color: #333;
+  padding-left: 8px;
+}
+
+/* 搜索框和按钮的容器 */
+.search-bar {
+  margin-bottom: 20px;
+  gap: 10px; /* 增加输入框和按钮之间的间距 */
+}
+
+.manage-button {
+  display: flex;
+  justify-content: center;
+}
+
+/* 搜索框样式 */
+.search-bar input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.search-bar-button {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10pt;
+}
+
+/* 按钮样式 */
+.kokyaku-kanri button {
+  padding: 10px 20px;
+  margin: 2px;
+  border: none;
+  background-color: #28a745; /* 修改按钮颜色 */
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.kokyaku-kanri button:hover {
+  background-color: #218838; /* 修改按钮悬停颜色 */
+}
+
+.search-bar-button button{
+  min-width: 90px;
+  margin-left: 10px;
+}
+
+.kokyaku-kanri .control {
+  padding: 5px  10px;
+  width: 45%;
+  min-width: 47px;
+}
+
+#contact-del {
+  background-color: #ed4981; /* 修改按钮颜色 */
+}
+#contact-del:hover{
+  background-color: #c61a54; /* 修改按钮颜色 */
+}
+
+.manage-button button{
+  min-width: 110px;
+  margin: 5px;
+}
+
+.manage-button #previous {
+  background-color: #007bff;
+}
+
+.manage-button #previous:hover {
+  background-color: #1769aa;
+}
+
+.bank-account button {
+  padding: 5px  10px;
+  width: 80%;
+}
+
+
+/* 表格样式 */
+.kokyaku-kanri table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.kokyaku-kanri th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+.kokyaku-kanri th {
+  background-color: #007bff; /* 表头背景颜色 */
+  border: 1px solid #ddd;
+  color: white; /* 表头文字颜色 */
+}
+
+.kokyaku-info td:nth-child(odd) {
+  width: 10%;
+  min-width: 105px;
+}
+
+.result-fields table tr td {
+  border: 1px solid #ddd;
+}
+
+.kokyaku-kanri tbody td:last-child {
+  min-width: 60px;
+  padding: 1%;
+  text-align: center;
+}
+
+.bank-account table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #dee2e6;
+}
+
+.bank-account table th {
+  border: 1px solid #dee2e6;
+  background-color: #f4f4f9;
+  color: inherit;
+  font-weight: inherit;
+  width: 15%;
+}
+
+.bank-account th {
+  min-width: 105px;
+}
+
+.bank-account td:first-child{
+  width: 5%;
+  max-width: 15px;
+}
+
+.bank-account td {
+  border: 1px solid #dee2e6;
+  color: inherit;
+  font-style: inherit;
+}
+
+.bank-account td:nth-child(6) {
+  width: 5%;
+  min-width: 80px;
+  padding: 2px;
+  text-align: center;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-bottom-style: hidden;
+}
+
+/* 错误消息样式 */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -56,15 +56,26 @@ const Menu = () => {
       ]
     },
     {
-      label: "給料",
-      icon: "pi pi-wallet",
+      label: '顧客',
+      icon: 'pi pi-fw pi-users',
       items: [
         {
-          label: "給料管理",
-          icon: "pi pi-fw pi-file",
+          label: '顧客管理',
+          icon: 'pi pi-fw pi-user-edit',
+          command: () => { navigate('/react/CustMgt'); }
         },
-      ],
-    },
+        {
+          label: '顧客口座管理',
+          icon: 'pi pi-fw pi-money-bill',
+          command: () => { navigate('/react/CustBankMgt'); }
+        },
+        {
+          label: '顧客案件管理',
+          icon: 'pi pi-fw pi-file',
+          // command: () => { navigate('/react/CustCaseMgt'); }
+        }
+      ]
+    }
   ];
 
   return (
