@@ -123,22 +123,17 @@ body {
     /* 调整字体颜色 */
 }
 
-  /*左缩进20*/
-  .margin-left-20 {
-      margin-left: 20px;
-  }
+/*左缩进20*/
+.margin-left-20 {
+margin-left: 20px;
+}
 
-  /*左缩进30*/
-  .margin-left-30 {
-      margin-left: 30px;
-  }
+/*左缩进50*/
+.margin-left-50 {
+    margin-left: 50px;
+}
 
-  /*左缩进50*/
-  .margin-left-50 {
-      margin-left: 50px;
-  }
-
-  /*左缩进100*/
-  .margin-left-100 {
-      margin-left: 100px;
-  }
+/*左缩进100*/
+.margin-left-100 {
+margin-left: 100px;
+}

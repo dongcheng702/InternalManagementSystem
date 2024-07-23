@@ -1,0 +1,46 @@
+  /* 検索欄*/
+  .search {
+    text-align: left;
+    /* margin-left: 90px; */
+    font-size: 14px;
+    /* 调整字体大小 */
+    font-weight: 500;
+    /* 调整字体粗细 */
+    font-family: Arial, sans-serif;
+    /* 调整字体类型 */
+    color: rgb(102, 102, 102);
+    /* 调整字体颜色 */
+  }
+
+  /*検索欄DIV*/
+  .margin-bottom-20 {
+    margin-bottom: 20px;
+  }
+
+  .search-fields select{
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+  .search-bar {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    /* 增加输入框和按钮之间的间距 */
+}
+
+  /* 表格标题居中*/
+  .table-center th {
+    text-align: center;
+  }
+
+  /* 错误消息样式 */
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+  }

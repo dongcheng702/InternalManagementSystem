@@ -30,7 +30,9 @@ import Login from "./components/Login";
 import MainLayout from "./components/MainLayout";
 import EmployeeList from "./components/EmployeeList";
 import WorkHourList from "./components/WorkHourList";
-import CostManagement from "./components/CostManagement";
+import MgtExpense from "./components/MgtExpense";
+import RqtExpense from "./components/RqtExpense";
+import CostApproval from "./components/CostApproval";
 import SalaryMgt from "./components/SalaryMgt";
 import "./assets/css/global.css";
 
@@ -44,7 +46,9 @@ function App() {
           {/* Load only the content */}
           <Route path="/react/EmployeeList" element={<EmployeeList />} />
           <Route path="/react/WorkHourList" element={<WorkHourList />} />
-          <Route path="/react/CostManagement" element={<CostManagement />} />
+          <Route path="/react/MgtExpense" element={<MgtExpense />} />
+          <Route path="/react/RqtExpense" element={<RqtExpense />} />
+          <Route path="/react/CostApproval" element={<CostApproval />} />
           <Route path="/react/SalaryMgt" element={<SalaryMgt />} />
         </Route>
       </Routes>

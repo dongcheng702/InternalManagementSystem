@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './CostManagement.css';
+// import './RqtExpense.css';
 
 const ExpenseList = () => {
   const [employees, setEmployees] = useState([]);
@@ -13,7 +13,6 @@ const ExpenseList = () => {
   const [paramPosition, setParamPosition] = useState('');
   const [businessError, setBusinessError] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
-  const test = useState('test');
 
   const handleSelectAll = (event) => {
     if (event.target.checked) {
