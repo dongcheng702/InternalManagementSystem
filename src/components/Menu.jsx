@@ -51,7 +51,17 @@ const Menu = () => {
         {
           label: '経費管理',
           icon: 'pi pi-fw pi-ethereum',
-          command: () => { navigate('/react/CostManagement'); }
+          command: () => { navigate('/react/MgtExpense'); }
+        },
+        {
+          label: '経費申請',
+          icon: 'pi pi-fw pi-file',
+          command: () => { navigate('/react/RqtExpense'); }
+        },
+        {
+          label: '費用承認',
+          icon: 'pi pi-fw pi-file',
+          command: () => { navigate('/react/CostApproval'); }
         }
       ]
     },
