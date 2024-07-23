@@ -1,38 +1,69 @@
-  /* 検索欄*/
-  .select {
-    text-align: left;
-    margin-left: 90px;
-  }
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  /*検索欄DIV*/
-  .select-div {
-    margin-bottom: 20px;
-  }
+.search-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  /*左缩进20*/
-  .margin-left-20 {
-    margin-left: 20px;
-  }
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
 
-  /*左缩进50*/
-  .margin-left-50 {
-    margin-left: 50px;
-  }
+.input-group input{
+  min-width: 200px;
+}
 
-  /*左缩进100*/
-  .margin-left-100 {
-    margin-left: 100px;
-  }
+.search-date,
+.search-select,
+.search-input,
+.search-button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 40px;
+  box-sizing: border-box;
+}
 
+.search-label {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  /* 调整字体大小 */
+  font-weight: 500;
+  /* 调整字体粗细 */
+  font-family: Arial, sans-serif;
+  /* 调整字体类型 */
+  color: rgb(102, 102, 102);
+  /* 调整字体颜色 */
+}
 
-  /* 表格标题居中*/
-  .table-center th {
-    text-align: center;
-  }
+.search-button {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  /* 错误消息样式 */
-  .error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+.search-button:hover {
+  background-color: #218838;
+}
+
+/* Optional: Adjust button width for better alignment */
+.search-button {
+  flex: 0 0 120px;
+  /* Adjust width as needed */
+}
