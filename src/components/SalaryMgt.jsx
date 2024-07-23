@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Tabs, Divider, Tag } from "antd";
 import "./SalaryMgt.css";
 
 const ShainIchiran = () => {
@@ -12,7 +13,6 @@ const ShainIchiran = () => {
   const [paramDepartment, setParamDepartment] = useState("");
   const [paramPosition, setParamPosition] = useState("");
   const [paramID, setParamID] = useState("");
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
@@ -114,6 +114,17 @@ const ShainIchiran = () => {
       </div>
 
       <div>
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Tab 1" key="1">
+            Content of Tab Pane 1
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Tab 2" key="2">
+            Content of Tab Pane 2
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Tab 3" key="3">
+            Content of Tab Pane 3<Tag color="magenta">magenta</Tag>
+          </Tabs.TabPane>
+        </Tabs>
         <table className="kr-table">
           <thead>
             <tr>
