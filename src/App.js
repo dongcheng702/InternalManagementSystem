@@ -35,6 +35,10 @@ import RqtExpense from "./components/RqtExpense";
 import CostApproval from "./components/CostApproval";
 import SalaryMgt from "./components/SalaryMgt";
 import "./assets/css/global.css";
+import CustMgt from './components/CustMgt';
+import CustMgtDetail from './components/CustMgtDetail';
+import CustBankMgt from './components/CustBankMgt';
+import CustBankMgtDetail from './components/CustBankMgtDetail';
 
 function App() {
   return (
@@ -50,6 +54,10 @@ function App() {
           <Route path="/react/RqtExpense" element={<RqtExpense />} />
           <Route path="/react/CostApproval" element={<CostApproval />} />
           <Route path="/react/SalaryMgt" element={<SalaryMgt />} />
+          <Route path="/react/CustMgt" element={<CustMgt />} />
+          <Route path="/react/CustMgtDetail" element={<CustMgtDetail />} />
+          <Route path="/react/CustBankMgt" element={<CustBankMgt />} />
+          <Route path="/react/CustBankMgtDetail" element={<CustBankMgtDetail />} />
         </Route>
       </Routes>
     </Router>
