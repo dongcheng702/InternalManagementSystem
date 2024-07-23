@@ -94,3 +94,18 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
+
+/* 标签 */
+.search-label {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    /* 调整字体大小 */
+    font-weight: 500;
+    /* 调整字体粗细 */
+    font-family: Arial, sans-serif;
+    /* 调整字体类型 */
+    color: rgb(102, 102, 102);
+    /* 调整字体颜色 */
+}

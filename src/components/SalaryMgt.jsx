@@ -55,52 +55,63 @@ const ShainIchiran = () => {
     <div className="shain-ichiran">
       <h2>給料管理</h2>
       {businessError && <p className="error-message">{businessError}</p>}
-      <div className="search-fields">
-        <input
-          type="date"
-          value={paramBirthday}
-          onChange={(e) => setParamBirthday(e.target.value)}
-        />
-        <span className="select">部門：</span>
-        <select
-          value={paramPosition}
-          onChange={(e) => setParamPosition(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">部門1</option>
-          <option value="2">部門2</option>
-          <option value="3">部門3</option>
-        </select>
-
-        <span className="select">職務：</span>
-        <select
-          value={paramDepartment}
-          onChange={(e) => setParamDepartment(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">職務1</option>
-          <option value="2">職務2</option>
-          <option value="3">職務3</option>
-        </select>
-        <input
-          type="text"
-          placeholder="社員名で検索"
-          value={paramName}
-          onChange={(e) => setParamName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="社員IDを入力してください"
-          value={paramID}
-          onChange={(e) => setParamID(e.target.value)}
-        />
-        <button id="btn">給料計算</button>
-        <button id="btn">控除設定</button>
-        <button id="btn">クリア</button>
-        <button id="btn" onClick={fetchEmployees}>
-          再検索
-        </button>
+      <div className="search-container">
+        <div className="search-group">
+          <div className="input-group">
+            <input
+              type="date"
+              className="search-date"
+              value={paramBirthday}
+              onChange={(e) => setParamBirthday(e.target.value)}
+            />
+            <span className="search-label">部門：</span>
+            <select
+              className="search-select"
+              value={paramPosition}
+              onChange={(e) => setParamPosition(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="1">部門1</option>
+              <option value="2">部門2</option>
+              <option value="3">部門3</option>
+            </select>
+            <span className="search-label">職務：</span>
+            <select
+              className="search-select"
+              value={paramDepartment}
+              onChange={(e) => setParamDepartment(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="1">職務1</option>
+              <option value="2">職務2</option>
+              <option value="3">職務3</option>
+            </select>
+            <button className="search-button">給料計算</button>
+            <button className="search-button">控除設定</button>
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="社員名"
+              className="search-input"
+              value={paramName}
+              onChange={(e) => setParamName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="社員ID"
+              className="search-input"
+              value={paramID}
+              onChange={(e) => setParamID(e.target.value)}
+            />
+            <button className="search-button">クリア</button>
+            <button className="search-button" onClick={fetchEmployees}>
+              再検索
+            </button>
+          </div>
+        </div>
       </div>
+
       <div>
         <table>
           <thead>
