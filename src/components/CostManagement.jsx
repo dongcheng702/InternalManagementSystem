@@ -207,7 +207,7 @@ const ExpenseList = () => {
       <span className='margin-left-20'>合計件数</span>
       <span className='margin-left-100'>表示件数/頁</span>
       <span className='margin-left-20'> &lt; 1 2 3... &gt;</span>
-      <span className='margin-left-50'> ( 1 )頁へ</span>
+      <span className='margin-left-50'> ( 1 )頁へ</span>  
     </div>
   );
 };
