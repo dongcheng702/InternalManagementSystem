@@ -72,7 +72,7 @@ const ShainIchiran = () => {
           <option value="3">部門3</option>
         </select>
 
-        <span className="select">職務：123</span>
+        <span className="select">職務：</span>
         <select
           value={paramDepartment}
           onChange={(e) => setParamDepartment(e.target.value)}
