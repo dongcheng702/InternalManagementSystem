@@ -74,82 +74,87 @@ const ExpenseList = () => {
       <h2>経費管理一覧</h2>
       {businessError && <p className="error-message">{businessError}</p>}
       <div className="margin-bottom-20">
-        <span className="select">社員ID：</span>
-        <input
-          type="text"
-          placeholder="社員IDを入力してください"
-          value={paramName}
-          onChange={(e) => setParamName(e.target.value)}
-        />
-        <sapn className="select">社員名：</sapn><input
-          type="text"
-          placeholder="社員名を入力してください"
-          value={paramName}
-          onChange={(e) => setParamName(e.target.value)}
-        />
-      </div>
-      <div className="margin-bottom-20">
+        <div className='search-label'>
+          <div className="search-fields">
+            <span className='search'>社員ID:</span>
+            <input
+              type="text"
+              placeholder="社員IDを入力してください"
+              value={paramName}
+              onChange={(e) => setParamName(e.target.value)}
+            />
+            <span>社員名:</span><input
+              type="text"
+              placeholder="社員名を入力してください"
+              value={paramName}
+              onChange={(e) => setParamName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="search-fields">
+          <div className="search-bar">
+            <span className="search">部門:</span>
+            <select
+              value={paramPosition}
+              onChange={(e) => setParamPosition(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="1">部門1</option>
+              <option value="2">部門2</option>
+              <option value="3">部門3</option>
+            </select>
 
-        <span className="select">部門：</span>
-        <select
-          value={paramPosition}
-          onChange={(e) => setParamPosition(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">部門1</option>
-          <option value="2">部門2</option>
-          <option value="3">部門3</option>
-        </select>
+            <span className="search">職務:</span>
+            <select
+              value={paramDepartment}
+              onChange={(e) => setParamDepartment(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="1">職務1</option>
+              <option value="2">職務2</option>
+              <option value="3">職務3</option>
+            </select>
 
-        <span className="select">職務：</span>
-        <select
-          value={paramDepartment}
-          onChange={(e) => setParamDepartment(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">職務1</option>
-          <option value="2">職務2</option>
-          <option value="3">職務3</option>
-        </select>
+            <span className="search">処理状態:</span>
+            <select
+              value={paramDepartment}
+              onChange={(e) => setParamDepartment(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="1">承認まち</option>
+              <option value="2">承認済み</option>
+              <option value="3">承認不可</option>
+              <option value="3">清算中</option>
+              <option value="3">清算済み</option>
+            </select>
+          </div>
+        </div>
 
-        <span className="select">処理状態：</span>
-        <select
-          value={paramDepartment}
-          onChange={(e) => setParamDepartment(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">承認まち</option>
-          <option value="2">承認済み</option>
-          <option value="3">承認不可</option>
-          <option value="3">清算中</option>
-          <option value="3">清算済み</option>
-        </select>
+        <div className='margin-bottom-20'>
+          <div className='search-label'>
+            <span className="search">日付指定:</span>
+            <input
+              type="date"
+              placeholder="最初日を選択してください"
+              value={paramFirstDay}
+              onChange={(e) => setParamFirstDay(e.target.value)}
+            /><span>~</span>
+            <input
+              type="date"
+              placeholder="最終日を選択してください"
+              value={paramLastDay}
+              onChange={(e) => setParamLastDay(e.target.value)}
+            />
 
-      </div>
-
-      <div className='margin-bottom-20'>
-        <span className="select">日付指定：</span>
-        <input
-          type="date"
-          placeholder="最初日を選択してください"
-          value={paramFirstDay}
-          onChange={(e) => setParamFirstDay(e.target.value)}
-        /><span>~</span> 
-        <input
-          type="date"
-          placeholder="最終日を選択してください"
-          value={paramLastDay}
-          onChange={(e) => setParamLastDay(e.target.value)}
-        />
+          </div>
+        </div>
 
 
-      </div>
-
-
-      <div className='margin-bottom-20'>
-          <button id="btn" className='select' onClick={fetchEmployees}>検索</button>
-          <button id="btn" className='select' onClick={fetchEmployees}>申請</button>
-          <button id="btn" className='select' onClick={fetchEmployees}>一括承認</button>
+        <div className='margin-bottom-20'>
+          <button id="btn" onClick={fetchEmployees}>検索</button>
+          <button id="btn" className='margin-left-50' onClick={fetchEmployees}>申請</button>
+          <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
+        </div>
       </div>
       <div>
         <table>
@@ -157,8 +162,8 @@ const ExpenseList = () => {
             <tr>
               <th>
                 <input type="checkbox"
-                onChange={handleSelectAll}
-                checked={selectedRows.length === employees.length}
+                  onChange={handleSelectAll}
+                  checked={selectedRows.length === employees.length}
                 />
               </th>
               <th>会社名</th>
@@ -182,7 +187,7 @@ const ExpenseList = () => {
                     type="checkbox"
                     onChange={(e) => handleSelectRow(e, employee.employeeId)}
                     checked={selectedRows.includes(employee.employeeId)}
-                    />
+                  />
                 </td>
 
                 <td>{employee.employeeId}</td>
@@ -196,8 +201,8 @@ const ExpenseList = () => {
                 <td></td>
                 <td></td>
                 <td>
-                <button>取り消し</button>
-                <button>承認</button>
+                  <button>取り消し</button>
+                  <button>承認</button>
                 </td>
               </tr>
             ))}
