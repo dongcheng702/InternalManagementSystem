@@ -7,7 +7,7 @@
 .search-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .input-group {
@@ -17,34 +17,15 @@
   gap: 10px;
 }
 
-.input-group input{
-  min-width: 200px;
+.input-group select{
+  min-width: 100px;
 }
 
-.search-date,
-.search-select,
-.search-input,
-.search-button {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  height: 40px;
-  box-sizing: border-box;
+.input-group input {
+  min-width: 250px;
 }
 
-.search-label {
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  /* 调整字体大小 */
-  font-weight: 500;
-  /* 调整字体粗细 */
-  font-family: Arial, sans-serif;
-  /* 调整字体类型 */
-  color: rgb(102, 102, 102);
-  /* 调整字体颜色 */
-}
+
 
 .search-button {
   background-color: #28a745;
@@ -66,4 +47,38 @@
 .search-button {
   flex: 0 0 120px;
   /* Adjust width as needed */
+
+}
+
+/*左缩进85*/
+.margin-left-85 {
+  margin-left:85px;
+}
+
+/* 表格样式 */
+.kr-table {
+  margin-top: 20px;
+}
+
+
+
+.description-list {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+dd {
+  margin: 0;
+  margin-bottom: 10px;
 }
