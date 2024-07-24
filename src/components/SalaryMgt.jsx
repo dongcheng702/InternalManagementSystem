@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Tabs, Divider, Tag, Descriptions, Checkbox } from "antd";
+import { Tabs, Checkbox } from "antd";
 import { Col, Row } from "antd";
+import { Pagination } from "antd";
 
 import "./SalaryMgt.css";
 
@@ -150,251 +151,284 @@ const ShainIchiran = () => {
       </div>
 
       <div>
-        <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="未作成" key="1">
-            <table>
-              <thead>
-                <tr>
-                  <th className="force-center">
-                    <Checkbox onChange={handleAllChecked}></Checkbox>
-                  </th>
-                  <th className="force-center">社員ID</th>
-                  <th className="force-center">社員名</th>
-                  <th className="force-center" colspan="3">
-                    勤怠
-                  </th>
-                  <th className="force-center" colspan="3">
-                    支給
-                  </th>
-                  <th className="force-center" colspan="3">
-                    控除
-                  </th>
-                  <th className="force-center" colspan="2">
-                    その他
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {employees.map((employee, index) => (
-                  <>
-                    <tr key={employee.employeeId}>
-                      <td className="force-center">
-                        <Checkbox
-                          onChange={() =>
-                            handleChecked(index, employee.employeeId)
-                          }
-                          checked={checkedList[index]}
-                        ></Checkbox>
-                      </td>
-                      <td className="force-center font-weight">
-                        {employee.employeeId}
-                      </td>
-                      <td className="force-center font-weight">
-                        {employee.name}
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            出勤日数:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {20}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            基本給料:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(500000)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            健康保険料:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(24900)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="2"></td>
-                    </tr>
+        <Tabs
+          defaultActiveKey="1"
+          items={[
+            {
+              key: "1",
+              label: "未作成",
+              children: (
+                <>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="force-center">
+                          <Checkbox onChange={handleAllChecked}></Checkbox>
+                        </th>
+                        <th className="force-center">社員ID</th>
+                        <th className="force-center">社員名</th>
+                        <th className="force-center" colSpan="3">
+                          勤怠
+                        </th>
+                        <th className="force-center" colSpan="3">
+                          支給
+                        </th>
+                        <th className="force-center" colSpan="3">
+                          控除
+                        </th>
+                        <th className="force-center" colSpan="2">
+                          その他
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {employees.map((employee, index) => (
+                        <React.Fragment key={employee.employeeId}>
+                          <tr>
+                            <td className="force-center">
+                              <Checkbox
+                                onChange={() =>
+                                  handleChecked(index, employee.employeeId)
+                                }
+                                checked={checkedList[index]}
+                              ></Checkbox>
+                            </td>
+                            <td className="force-center font-weight">
+                              {employee.employeeId}
+                            </td>
+                            <td className="force-center font-weight">
+                              {employee.name}
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  出勤日数:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {20}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  基本給料:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(500000)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  健康保険料:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(24900)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="2"></td>
+                          </tr>
+                          <tr>
+                            <td colSpan="3"></td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  勤務時間:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {"168:00:00"}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  残業手当:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas()}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  厚生年金保険料:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(44570)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="2"></td>
+                          </tr>
+                          <tr>
+                            <td colSpan="6"></td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  住宅手当:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas()}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  雇用保険料:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(2040)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="2"></td>
+                          </tr>
+                          <tr>
+                            <td colSpan="6"></td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  通勤手当:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(10000)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  社会保険料合計:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(71510)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="6"></td>
+                          </tr>
+                          <tr>
+                            <td colSpan="6"></td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  その他手当:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas()}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col span={15} className="col-title">
+                                  源泉所得税:
+                                </Col>
+                                <Col span={9} className="col-data">
+                                  {formatNumberWithCommas(19690)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3"></td>
+                          </tr>
+                          <tr>
+                            <td colSpan="6"></td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col
+                                  span={15}
+                                  className="col-title font-weight"
+                                >
+                                  支払総額:
+                                </Col>
+                                <Col span={9} className="col-data font-weight">
+                                  {formatNumberWithCommas(510000)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col
+                                  span={15}
+                                  className="col-title font-weight"
+                                >
+                                  控除額合計:
+                                </Col>
+                                <Col span={9} className="col-data font-weight">
+                                  {formatNumberWithCommas(91200)}
+                                </Col>
+                              </Row>
+                            </td>
+                            <td colSpan="3">
+                              <Row>
+                                <Col
+                                  span={15}
+                                  className="col-title font-weight"
+                                >
+                                  差引支払額:
+                                </Col>
+                                <Col span={9} className="col-data font-weight">
+                                  {formatNumberWithCommas(418800)}
+                                </Col>
+                              </Row>
+                            </td>
+                          </tr>
+                          <div className="row-border"></div>
+                        </React.Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                  <Pagination
+                    className="force-center"
+                    total={85}
+                    showSizeChanger
+                    showQuickJumper
+                    showTotal={(total) => `合計件数 ( ${total} )`}
+                    locale={{
+                      items_per_page: "/頁",
+                      jump_to: "",
+                      jump_to_confirm: "Confirm",
+                      page: "頁へ",
+                    }}
+                  />
+                </>
+              ),
+            },
+            {
+              key: "2",
+              label: "作成済み",
+              children: (
+                <table className="kr-table">
+                  <thead>
                     <tr>
-                      <td colspan="3"></td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            勤務時間:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {"168:00:00"}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            残業手当:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas()}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            厚生年金保険料:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(44570)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="2"></td>
+                      <th className="force-center">社員ID</th>
+                      <th className="force-center">社員名</th>
+                      <th className="force-center" colSpan="3">
+                        勤怠
+                      </th>
+                      <th className="force-center" colSpan="3">
+                        支給
+                      </th>
+                      <th className="force-center" colSpan="3">
+                        控除
+                      </th>
+                      <th className="force-center" colSpan="2">
+                        その他
+                      </th>
                     </tr>
-                    <tr>
-                      <td colspan="6"></td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            住宅手当:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas()}
-                          </Col>
-                        </Row>
-                      </td>
-
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            雇用保険料:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(2040)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6"></td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            通勤手当:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(10000)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            社会保険料合計:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(71510)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="6"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6"></td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            その他手当:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas()}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title">
-                            源泉所得税:
-                          </Col>
-                          <Col span={9} className="col-data">
-                            {formatNumberWithCommas(19690)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="6"></td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title font-weight">
-                            支払総額:
-                          </Col>
-                          <Col span={9} className="col-data font-weight">
-                            {formatNumberWithCommas(510000)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title font-weight">
-                            控除額合計:
-                          </Col>
-                          <Col span={9} className="col-data font-weight">
-                            {formatNumberWithCommas(91200)}
-                          </Col>
-                        </Row>
-                      </td>
-                      <td colspan="3">
-                        <Row>
-                          <Col span={15} className="col-title font-weight">
-                            差引支払額:
-                          </Col>
-                          <Col span={9} className="col-data font-weight">
-                            {formatNumberWithCommas(418800)}
-                          </Col>
-                        </Row>
-                      </td>
-                    </tr>
-                    <div className="row-border"></div>
-                  </>
-                ))}
-              </tbody>
-            </table>
-          </Tabs.TabPane>
-
-          <Tabs.TabPane tab="作成済み" key="2">
-            <table className="kr-table">
-              <thead>
-                <tr>
-                  <th className="force-center">社員ID</th>
-                  <th className="force-center">社員名</th>
-                  <th className="force-center" colspan="3">
-                    勤怠
-                  </th>
-                  <th className="force-center" colspan="3">
-                    支給
-                  </th>
-                  <th className="force-center" colspan="3">
-                    控除
-                  </th>
-                  <th className="force-center" colspan="2">
-                    その他
-                  </th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </Tabs.TabPane>
-        </Tabs>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              ),
+            },
+          ]}
+        />
       </div>
     </div>
   );
