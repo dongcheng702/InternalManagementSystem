@@ -83,3 +83,14 @@ table {
 .font-weight {
   font-weight: bold;
 }
+
+/* 隐藏 Checkbox 选中时的钩子 */
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  display: none; /* 隐藏钩子 */
+}
+
+/* 确保选中时背景颜色仍然可以显示 */
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #009fff; /* 自定义背景颜色 */
+  border-color: #009fff; /* 自定义边框颜色 */
+}
