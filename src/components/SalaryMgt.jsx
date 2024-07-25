@@ -4,6 +4,7 @@ import { Tabs, Checkbox } from "antd";
 import { Col, Row } from "antd";
 import { Pagination } from "antd";
 
+import { formatCurrency } from "../utils/utils";
 import "./SalaryMgt.css";
 
 const ShainIchiran = () => {
@@ -66,19 +67,6 @@ const ShainIchiran = () => {
 
     const allChecked = newCheckedList.every((item) => item);
     setAllChecked(allChecked);
-  };
-
-  const formatNumberWithCommas = (number) => {
-    // 确保传入的是数字
-    if (isNaN(number)) {
-      return "";
-    }
-    // 将数字转换为字符串，并添加千位分隔符
-    const formattedNumber = number
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // 添加日元符号
-    return `¥${formattedNumber}`;
   };
 
   if (loading) {
@@ -215,7 +203,7 @@ const ShainIchiran = () => {
                                   基本給料:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(500000)}
+                                  {formatCurrency(500000)}
                                 </Col>
                               </Row>
                             </td>
@@ -225,7 +213,7 @@ const ShainIchiran = () => {
                                   健康保険料:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(24900)}
+                                  {formatCurrency(24900)}
                                 </Col>
                               </Row>
                             </td>
@@ -249,7 +237,7 @@ const ShainIchiran = () => {
                                   残業手当:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas()}
+                                  {formatCurrency()}
                                 </Col>
                               </Row>
                             </td>
@@ -259,7 +247,7 @@ const ShainIchiran = () => {
                                   厚生年金保険料:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(44570)}
+                                  {formatCurrency(44570)}
                                 </Col>
                               </Row>
                             </td>
@@ -273,7 +261,7 @@ const ShainIchiran = () => {
                                   住宅手当:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas()}
+                                  {formatCurrency()}
                                 </Col>
                               </Row>
                             </td>
@@ -283,7 +271,7 @@ const ShainIchiran = () => {
                                   雇用保険料:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(2040)}
+                                  {formatCurrency(2040)}
                                 </Col>
                               </Row>
                             </td>
@@ -297,7 +285,7 @@ const ShainIchiran = () => {
                                   通勤手当:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(10000)}
+                                  {formatCurrency(10000)}
                                 </Col>
                               </Row>
                             </td>
@@ -307,7 +295,7 @@ const ShainIchiran = () => {
                                   社会保険料合計:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(71510)}
+                                  {formatCurrency(71510)}
                                 </Col>
                               </Row>
                             </td>
@@ -321,7 +309,7 @@ const ShainIchiran = () => {
                                   その他手当:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas()}
+                                  {formatCurrency()}
                                 </Col>
                               </Row>
                             </td>
@@ -331,7 +319,7 @@ const ShainIchiran = () => {
                                   源泉所得税:
                                 </Col>
                                 <Col span={9} className="col-data">
-                                  {formatNumberWithCommas(19690)}
+                                  {formatCurrency(19690)}
                                 </Col>
                               </Row>
                             </td>
@@ -348,7 +336,7 @@ const ShainIchiran = () => {
                                   支払総額:
                                 </Col>
                                 <Col span={9} className="col-data font-weight">
-                                  {formatNumberWithCommas(510000)}
+                                  {formatCurrency(510000)}
                                 </Col>
                               </Row>
                             </td>
@@ -361,7 +349,7 @@ const ShainIchiran = () => {
                                   控除額合計:
                                 </Col>
                                 <Col span={9} className="col-data font-weight">
-                                  {formatNumberWithCommas(91200)}
+                                  {formatCurrency(91200)}
                                 </Col>
                               </Row>
                             </td>
@@ -374,7 +362,7 @@ const ShainIchiran = () => {
                                   差引支払額:
                                 </Col>
                                 <Col span={9} className="col-data font-weight">
-                                  {formatNumberWithCommas(418800)}
+                                  {formatCurrency(418800)}
                                 </Col>
                               </Row>
                             </td>
@@ -423,6 +411,7 @@ const ShainIchiran = () => {
         showSizeChanger
         showQuickJumper
         showTotal={(total) => `合計件数 ( ${total} )`}
+        pageSizeOptions={[3, 5, 10]}
         locale={{
           items_per_page: "/頁",
           jump_to: "",
