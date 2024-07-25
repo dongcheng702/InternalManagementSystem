@@ -137,3 +137,11 @@ body {
 .margin-left-100 {
   margin-left: 100px;
 }
+
+/*分页居中*/
+.pagination-wrapper {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 (如果需要) */
+  padding: 10px; /* 可选，添加一些内边距 */
+}
