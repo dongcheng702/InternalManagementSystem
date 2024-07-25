@@ -379,24 +379,11 @@ const ShainIchiran = () => {
                               </Row>
                             </td>
                           </tr>
-                          <div className="row-border"></div>
+                          <tr className="row-border"></tr>
                         </React.Fragment>
                       ))}
                     </tbody>
                   </table>
-                  <Pagination
-                    className="force-center"
-                    total={85}
-                    showSizeChanger
-                    showQuickJumper
-                    showTotal={(total) => `合計件数 ( ${total} )`}
-                    locale={{
-                      items_per_page: "/頁",
-                      jump_to: "",
-                      jump_to_confirm: "Confirm",
-                      page: "頁へ",
-                    }}
-                  />
                 </>
               ),
             },
@@ -430,6 +417,19 @@ const ShainIchiran = () => {
           ]}
         />
       </div>
+      <Pagination
+        total={employees.length}
+        className="pagination-wrapper"
+        showSizeChanger
+        showQuickJumper
+        showTotal={(total) => `合計件数 ( ${total} )`}
+        locale={{
+          items_per_page: "/頁",
+          jump_to: "",
+          jump_to_confirm: "Confirm",
+          page: "頁へ",
+        }}
+      />
     </div>
   );
 };
