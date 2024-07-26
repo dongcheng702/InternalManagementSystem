@@ -20,16 +20,19 @@ const ShainIchiran = () => {
   const [loginUser, setLoginUser] = useState("");
   const [deductionModel, setDeductionModel] = useState(false);
   // const [confirmLoading, setConfirmLoading] = useState(false);
+  const [pageSize, setPageSize] = useState(3);
 
-  const fetchEmployees = async () => {
+  const fetchSalary = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/react/EmployeeList",
+      const response = await axios.post(
+        "http://localhost:8080/react/salary/select",
         {
-          params: {
-            name: paramName,
-            birthday: paramSalaryDate,
-          },
+          param_name: paramName,
+          salary_date: paramSalaryDate,
+          department_id: paramDepartment,
+          position_id: paramPosition,
+          param_id: paramID,
+          pege_size: pageSize,
         }
       );
 
@@ -50,12 +53,12 @@ const ShainIchiran = () => {
   };
 
   useEffect(() => {
-    fetchEmployees();
+    fetchSalary();
     let user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : {};
     setLoginUser(user);
-  }, []);
+  }, [pageSize]);
 
   const handleAllChecked = (e) => {
     const checked = e.target.checked;
@@ -72,6 +75,12 @@ const ShainIchiran = () => {
 
     const allChecked = newCheckedList.every((item) => item);
     setAllChecked(allChecked);
+  };
+
+  //pageSize 变化的回调
+  const pageSizeChange = (current, size) => {
+    console.log("pageSize", current, size);
+    setPageSize(size);
   };
 
   //控除設定ポップアップ
@@ -550,7 +559,7 @@ const ShainIchiran = () => {
         <div className="search-group">
           <div className="input-group">
             <input
-              type="date"
+              type="month"
               className="search-date"
               value={paramSalaryDate}
               onChange={(e) => {
@@ -677,7 +686,7 @@ const ShainIchiran = () => {
             <button className="search-button margin-left-85" onClick={reset}>
               クリア
             </button>
-            <button className="search-button" onClick={fetchEmployees}>
+            <button className="search-button" onClick={fetchSalary}>
               再検索
             </button>
           </div>
@@ -694,6 +703,7 @@ const ShainIchiran = () => {
         showQuickJumper
         showTotal={(total) => `合計件数 ( ${total} )`}
         pageSizeOptions={[3, 5, 10]}
+        onShowSizeChange={pageSizeChange}
         locale={{
           items_per_page: "/頁",
           jump_to: "",
