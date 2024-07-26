@@ -1,63 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-// import './RqtExpense.css';
+// import axios from 'axios';
+import './RqtExpense.css';
+import '../assets/css/global.css';
+import { UploadOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Upload, Form, Input } from 'antd';
+
 
 const ExpenseList = () => {
-  const [employees, setEmployees] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [paramName, setParamName] = useState('');
-  const [paramFirstDay, setParamFirstDay] = useState('');
-  const [paramLastDay, setParamLastDay] = useState('');
-  const [paramDepartment, setParamDepartment] = useState('');
-  const [paramPosition, setParamPosition] = useState('');
   const [businessError, setBusinessError] = useState('');
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [paramName, setParamName] = useState('');
+  const [paramPosition, setParamPosition] = useState('');
 
-  const handleSelectAll = (event) => {
-    if (event.target.checked) {
-      const allRowIds = employees.map((item) => item.employeeId);
-      setSelectedRows(allRowIds);
-    } else {
-      setSelectedRows([]);
-    }
+  //追加输入框
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 4,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 20,
+      },
+    },
+  };
+  const formItemLayoutWithOutLabel = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 20,
+        offset: 4,
+      },
+    },
   };
 
-  const handleSelectRow = (event, id) => {
-    if (event.target.checked) {
-      setSelectedRows([...selectedRows, id]);
-    } else {
-      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
-    }
+  const onFinish = (values) => {
+    console.log('Received values of form:', values);
   };
 
-  const fetchEmployees = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/react/WorkHourList', {
-        params: {
-          name: paramName,
-          FirstDay: paramFirstDay,
-          LastDay: paramLastDay
-        }
-      });
 
-      if (response.data.error) {
-        setBusinessError(response.data.error);
-        setEmployees([]);
-      } else {
-        setEmployees(response.data.results);
-        setBusinessError('');
+  const props = {
+    // 文件上传的目标 URL
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange({ file, fileList }) {
+      if (file.status !== 'uploading') {
+        console.log(file, fileList);
       }
-
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    }
+    },
   };
 
   useEffect(() => {
-    fetchEmployees();
   }, []);
 
   if (loading) {
@@ -70,146 +73,193 @@ const ExpenseList = () => {
 
   return (
     <div className="shain-ichiran">
-      <h2>経費管理一覧</h2>
+      <h2>経費申請画面</h2>
       {businessError && <p className="error-message">{businessError}</p>}
-      <div className="select-div">
-        <span className="select">社員ID：</span>
-        <input
-          type="text"
-          placeholder="社員IDを入力してください"
-          value={paramName}
-          onChange={(e) => setParamName(e.target.value)}
-        />
-        <sapn className="select">社員名：</sapn><input
-          type="text"
-          placeholder="社員名を入力してください"
-          value={paramName}
-          onChange={(e) => setParamName(e.target.value)}
-        />
-      </div>
-      <div className="select-div">
-
-        <span className="select">部門：</span>
-        <select
-          value={paramPosition}
-          onChange={(e) => setParamPosition(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">部門1</option>
-          <option value="2">部門2</option>
-          <option value="3">部門3</option>
-        </select>
-
-        <span className="select">職務：</span>
-        <select
-          value={paramDepartment}
-          onChange={(e) => setParamDepartment(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">職務1</option>
-          <option value="2">職務2</option>
-          <option value="3">職務3</option>
-        </select>
-
-        <span className="select">処理状態：</span>
-        <select
-          value={paramDepartment}
-          onChange={(e) => setParamDepartment(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="1">承認まち</option>
-          <option value="2">承認済み</option>
-          <option value="3">承認不可</option>
-          <option value="3">清算中</option>
-          <option value="3">清算済み</option>
-        </select>
-
-      </div>
-
-      <div className='select-div'>
-        <span className="select">日付指定：</span>
-        <input
-          type="date"
-          placeholder="最初日を選択してください"
-          value={paramFirstDay}
-          onChange={(e) => setParamFirstDay(e.target.value)}
-        /><span>~</span> 
-        <input
-          type="date"
-          placeholder="最終日を選択してください"
-          value={paramLastDay}
-          onChange={(e) => setParamLastDay(e.target.value)}
-        />
-
-
-      </div>
-
-
-      <div className='select-div'>
-          <button id="btn" className='select' onClick={fetchEmployees}>検索</button>
-          <button id="btn" className='select' onClick={fetchEmployees}>申請</button>
-          <button id="btn" className='select' onClick={fetchEmployees}>一括承認</button>
+      <div className='margin-bottom-20'>
+        <div className="search-fields">
+          <span className='search'>職務:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+          <span className='search'>社員ID:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+        </div>
       </div>
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <input type="checkbox"
-                onChange={handleSelectAll}
-                checked={selectedRows.length === employees.length}
-                />
-              </th>
-              <th>会社名</th>
-              <th>経費申請ID</th>
-              <th>社員ID</th>
-              <th>社員名</th>
-              <th>部門</th>
-              <th>職務</th>
-              <th>申請日</th>
-              <th>申請金額</th>
-              <th>処理状態</th>
-              <th>精算金額</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees.map(employee => (
-              <tr key={employee.employeeId}>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={(e) => handleSelectRow(e, employee.employeeId)}
-                    checked={selectedRows.includes(employee.employeeId)}
-                    />
-                </td>
-
-                <td>{employee.employeeId}</td>
-                <td>{employee.name}</td>
-                <td>{employee.mail}</td>
-                <td>{employee.birthday}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                <button>取り消し</button>
-                <button>承認</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="search-fields">
+          <span className='search'>部門:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+          <span className='search'>名前:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+        </div>
       </div>
+      <div>
+        <div className="search-fields">
+          <span className='search'>費用名:</span>
+          <select className='search-select'
+            value={paramPosition}
+            onChange={(e) => setParamPosition(e.target.value)}
+          >
+            <option value=""></option>
+            <option value="1">タクシー代</option>
+            <option value="2">飲食代</option>
+            <option value="3">旅行費</option>
+            <option value="3">定期券</option>
+          </select>
+          <span className='search'>発生日:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="search-fields">
+        <span className='search'>申請金額:</span>
+        <input
+          type="text"
+          value={paramName}
+          onChange={(e) => setParamName(e.target.value)}
+        />
 
-      <span className='margin-left-20'>合計件数</span>
-      <span className='margin-left-100'>表示件数/頁</span>
-      <span className='margin-left-20'> &lt; 1 2 3... &gt;</span>
-      <span className='margin-left-50'> ( 1 )頁へ</span>
+        <Upload {...props}>
+          <Button icon={<UploadOutlined />}>Upload</Button>
+        </Upload>
+
+      </div>
+      <div className='centerYori'>
+
+        <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} onFinish={onFinish}>
+          <Form.List
+            name="names"
+          // rules={[
+          //   {
+          //     validator: async (_, names) => {
+          //       if (!names || names.length < 2) {
+          //         return Promise.reject(new Error('At least 2 passengers'));
+          //       }
+          //     },
+          //   },
+          // ]}
+          >
+            {(fields, { add, remove }, { errors }) => (
+              <>
+                {fields.map((field, index) => (
+                  <div className="search-fields">
+                    <Form.Item
+                      {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+                      // label={index === 0 ? 'Passengers' : ''}
+                      required={false}
+                      key={field.key}
+                    >
+
+                      <Form.Item
+                        {...field}
+                        validateTrigger={['onChange', 'onBlur']}
+                        rules={[
+                          {
+                            required: true,
+                            whitespace: true,
+                            message: "Please input passenger's name or delete this field.",
+                          },
+                        ]}
+                        noStyle
+                      >
+
+                        <div className="search-fields">
+                          <span className='search'>費用名:</span>
+                          <select className='search-select'
+                            value={paramPosition}
+                            onChange={(e) => setParamPosition(e.target.value)}
+                          >
+                            <option value=""></option>
+                            <option value="1">タクシー代</option>
+                            <option value="2">飲食代</option>
+                            <option value="3">旅行費</option>
+                            <option value="3">定期券</option>
+                          </select>
+                          <span className='search'>発生日:</span>
+                          <input
+                            type="text"
+                            value={paramName}
+                            onChange={(e) => setParamName(e.target.value)}
+                          />
+
+                        </div>
+                        <div className="search-fields">
+                          <span className='search'>申請金額:</span>
+                          <input
+                            type="text"
+                            value={paramName}
+                            onChange={(e) => setParamName(e.target.value)}
+                          />
+
+                          <Upload {...props}>
+                            <Button icon={<UploadOutlined />}>Upload</Button>
+                          </Upload>
+
+                        </div>
+                      </Form.Item>
+                      {fields.length > 0 ? (
+                        <MinusCircleOutlined
+                          className="dynamic-delete-button"
+                          onClick={() => remove(field.name)}
+                        />
+                      ) : null}
+                    </Form.Item>
+                  </div>
+                ))}
+                <div className="search-fields">
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+
+                      icon={<PlusCircleOutlined />}
+
+                    >
+                      <span>費用申請追加</span>
+                    </Button>
+                    <Form.ErrorList errors={errors} />
+
+                  </Form.Item>
+                </div>
+              </>
+            )}
+          </Form.List>
+        </Form>
+
+        <div className="search-fields">
+          <span className='search'>総金額:</span>
+          <input
+            type="text"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className='search-fields'>
+        <button>申請</button>
+        <button>戻る</button>
+      </div>
     </div>
+
   );
 };
 
 export default ExpenseList;
+
