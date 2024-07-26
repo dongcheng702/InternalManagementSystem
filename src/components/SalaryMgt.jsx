@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Tabs, Checkbox } from "antd";
-import { Col, Row } from "antd";
-import { Pagination } from "antd";
+import { Tabs, Checkbox, Col, Row, Pagination, Modal } from "antd";
 
 import { formatCurrency } from "../utils/utils";
 import "./SalaryMgt.css";
@@ -20,6 +18,8 @@ const ShainIchiran = () => {
   const [checkedList, setCheckedList] = useState([]);
   const [allChecked, setAllChecked] = useState(false);
   const [loginUser, setLoginUser] = useState("");
+  const [deductionModel, setDeductionModel] = useState(false);
+  // const [confirmLoading, setConfirmLoading] = useState(false);
 
   const fetchEmployees = async () => {
     try {
@@ -72,6 +72,16 @@ const ShainIchiran = () => {
 
     const allChecked = newCheckedList.every((item) => item);
     setAllChecked(allChecked);
+  };
+
+  //控除設定ポップアップ
+  const showModal = () => {
+    setDeductionModel(true);
+  };
+
+  const handleCancel = () => {
+    console.log("Clicked cancel button");
+    setDeductionModel(false);
   };
 
   //クリア
@@ -581,7 +591,65 @@ const ShainIchiran = () => {
                 <button className="search-button margin-left-20">
                   給料計算
                 </button>
-                <button className="search-button">控除設定</button>
+                <button className="search-button" onClick={showModal}>
+                  控除設定
+                </button>
+                <Modal
+                  title="控除設定"
+                  open={deductionModel}
+                  onCancel={handleCancel}
+                >
+                  <div className="modal-content">
+                    <div className="modal-item">
+                      <span className="search-label">健康保険料率:</span>
+                      <input
+                        type="text"
+                        className="search-input"
+                        value={paramName}
+                        onChange={(e) => {
+                          setParamName(e.target.value);
+                          console.log("健康保険料率", e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="modal-item">
+                      <span className="search-label">厚生年金保険料率:</span>
+                      <input
+                        type="text"
+                        className="search-input"
+                        value={paramName}
+                        onChange={(e) => {
+                          setParamName(e.target.value);
+                          console.log("厚生年金保険料率", e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="modal-item">
+                      <span className="search-label">雇用保険料率:</span>
+                      <input
+                        type="text"
+                        className="search-input"
+                        value={paramName}
+                        onChange={(e) => {
+                          setParamName(e.target.value);
+                          console.log("雇用保険料率", e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="modal-item">
+                      <span className="search-label">源泉所得税率:</span>
+                      <input
+                        type="text"
+                        className="search-input"
+                        value={paramName}
+                        onChange={(e) => {
+                          setParamName(e.target.value);
+                          console.log("源泉所得税率", e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Modal>
               </>
             )}
           </div>
