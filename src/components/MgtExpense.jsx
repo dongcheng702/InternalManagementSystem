@@ -5,7 +5,7 @@ import './MgtExpense.css';
 import '../assets/css/global.css';
 import { Pagination } from 'antd';
 
-const showTotal = (total) => `Total ${total} items`;
+const showTotal = (total) => ` 合計件数 ${total}`;
 
 const ExpenseList = () => {
   const [employees, setEmployees] = useState([]);
@@ -84,7 +84,7 @@ const ExpenseList = () => {
     <div className="shain-ichiran">
       <h2>経費管理一覧</h2>
       {businessError && <p className="error-message">{businessError}</p>}
-      <div>
+      <div className='search-bar'>
         <div className="search-fields" >
           <span className='search-label'>社員ID:</span>
           <input
@@ -100,6 +100,8 @@ const ExpenseList = () => {
             onChange={(e) => setParamName(e.target.value)}
           />
         </div>
+      </div>
+      <div className='search-bar'>
         <div className="search-fields">
           <span className='search-label'>部門:</span>
           <select className='search-select'
@@ -136,36 +138,32 @@ const ExpenseList = () => {
             <option value="3">清算済み</option>
           </select>
         </div>
-
+      </div>
+      <div className='search-bar'>
         <div className='search-fields'>
-          <div className='search-label'>
-            <span>日付指定:</span>
-            <input
-              type="date"
-              placeholder="最初日を選択してください"
-              value={paramFirstDay}
-              onChange={(e) => setParamFirstDay(e.target.value)}
-            /><span>~</span>
-            <input
-              type="date"
-              placeholder="最終日を選択してください"
-              value={paramLastDay}
-              onChange={(e) => setParamLastDay(e.target.value)}
-            />
-          </div>
+          <span className='search-label'>日付指定:</span>
+          <input
+            type="date"
+            placeholder="最初日を選択してください"
+            value={paramFirstDay}
+            onChange={(e) => setParamFirstDay(e.target.value)}
+          /><span>~</span>
+          <input
+            type="date"
+            placeholder="最終日を選択してください"
+            value={paramLastDay}
+            onChange={(e) => setParamLastDay(e.target.value)}
+          />
         </div>
-        <div className="search-fields">
-          <div className='margin-bottom-20'>
-
-            <button id="btn" onClick={fetchEmployees}>検索</button>
-            <button id="btn" className='margin-left-50' onClick={gotoRqt}>申請</button>
-            <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
-          </div>
-        </div>
+      </div>
+      <div className="search-bar">
+        <button id="btn" onClick={fetchEmployees}>検索</button>
+        <button id="btn" className='margin-left-50' onClick={gotoRqt}>申請</button>
+        <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
       </div>
 
       <div className='margin-bottom-20'>
-        <table>
+        <table className='text-center'>
           <thead>
             <tr>
               <th>
@@ -198,16 +196,16 @@ const ExpenseList = () => {
                   />
                 </td>
 
-                <td>ヤマダ電機</td>
-                <td>ビックカメラ</td>
-                <td>ヨドバシカメラ</td>
-                <td>社員A</td>
+                <td>三菱</td>
+                <td>1000</td>
+                <td>1001</td>
+                <td>木村</td>
                 <td>部門1</td>
                 <td>職務1</td>
                 <td>2024-07-23</td>
-                <td>30000</td>
+                <td>40000</td>
                 <td>承認まち</td>
-                <td>30000</td>
+                <td>未清算</td>
                 <td>
                   <button>取り消し</button>
                   <button>承認</button>
@@ -218,7 +216,15 @@ const ExpenseList = () => {
         </table>
       </div>
 
-      <Pagination total={50} showSizeChanger showQuickJumper />
+      <Pagination className='pagination-wrapper' total={employees.length} showSizeChanger showQuickJumper
+        showTotal={(total) => `合計件数 ( ${total} )`}
+        pageSizeOptions={[3, 5, 10]}
+        locale={{
+          items_per_page: "/頁",
+          jump_to: "",
+          jump_to_confirm: "Confirm",
+          page: "頁へ",
+        }} />
     </div>
   );
 };

@@ -1,24 +1,20 @@
 .search-bar {
   display: flex;
-  align-items: left;
-  align-items: center;
-  margin-bottom: 20px;
+  white-space: nowrap;
+  justify-content: flex-start;
+  /* 水平居左对齐 */
   gap: 20px;
-  padding: 10px;
-  width: 250px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
 }
 
+/*向下填充20px*/
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
 
-
-  /*向下填充20px*/
-  .margin-bottom-20 {
-    margin-bottom: 20px;
-  }
-
-  /* 表格标题居中*/
-  .table-center th {
-    text-align: center;
-  }
-
+/* 文本强制居中*/
+.text-center td,th {
+  text-align: center !important;;/* 因为全体布局使用global (.shain-ichiran th,td) 是居左显示 */
+  white-space: nowrap; /* 防止文字换行重叠 */
+  padding: 8px;
+  /* 增加一些内边距以防止内容紧贴边框 */
+}
