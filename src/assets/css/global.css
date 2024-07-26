@@ -110,9 +110,6 @@ body {
 
 /* 标签 */
 .search-label {
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
   font-size: 14px;
   /* 调整字体大小 */
   font-weight: 500;
