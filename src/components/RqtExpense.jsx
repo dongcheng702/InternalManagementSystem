@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 import './RqtExpense.css';
 import '../assets/css/global.css';
 import { UploadOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -12,6 +13,7 @@ const ExpenseList = () => {
   const [businessError, setBusinessError] = useState('');
   const [paramName, setParamName] = useState('');
   const [paramPosition, setParamPosition] = useState('');
+  const navigate = useNavigate();
 
   //追加输入框
   const formItemLayout = {
@@ -58,6 +60,12 @@ const ExpenseList = () => {
         console.log(file, fileList);
       }
     },
+  };
+
+  const back = () => {
+    console.log("back");
+    navigate('/react/MgtExpense');
+
   };
 
   useEffect(() => {
@@ -254,7 +262,7 @@ const ExpenseList = () => {
       </div>
       <div className='search-fields'>
         <button>申請</button>
-        <button>戻る</button>
+        <button onClick={back}>戻る</button>
       </div>
     </div>
 

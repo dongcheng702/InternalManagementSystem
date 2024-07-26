@@ -217,7 +217,7 @@ const ExpenseList = () => {
       </div>
 
       <Pagination className='pagination-wrapper' total={employees.length} showSizeChanger showQuickJumper
-        showTotal={(total) => `合計件数 ( ${total} )`}
+        showTotal={ showTotal }
         pageSizeOptions={[3, 5, 10]}
         locale={{
           items_per_page: "/頁",
