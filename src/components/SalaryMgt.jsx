@@ -21,6 +21,7 @@ const ShainIchiran = () => {
   const [deductionModel, setDeductionModel] = useState(false);
   // const [confirmLoading, setConfirmLoading] = useState(false);
   const [pageSize, setPageSize] = useState(3);
+  const [tabKey, setTabKey] = useState("2");
 
   const fetchSalary = async () => {
     try {
@@ -33,6 +34,7 @@ const ShainIchiran = () => {
           position_id: paramPosition,
           param_id: paramID,
           pege_size: pageSize,
+          tab_key: tabKey,
         }
       );
 
@@ -52,13 +54,35 @@ const ShainIchiran = () => {
     }
   };
 
+  // // 仅在组件初始化时设置 tabKey
+  // useEffect(() => {
+  //   const initializeData = async () => {
+  //     const user = localStorage.getItem("user")
+  //       ? JSON.parse(localStorage.getItem("user"))
+  //       : {};
+  //     setLoginUser(user);
+
+  //     // 根据用户类型设置 tabKey 的默认值
+  //     if (user === "admin") {
+  //       setTabKey("1");
+  //     } else {
+  //       setTabKey("2");
+  //     }
+
+  //     // 发请求以获取数据
+  //     await fetchSalary();
+  //   };
+
+  //   initializeData();
+  // }, []); // 空依赖数组，确保只在组件首次渲染时运行
+
   useEffect(() => {
-    fetchSalary();
-    let user = localStorage.getItem("user")
+    const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : {};
     setLoginUser(user);
-  }, [pageSize]);
+    fetchSalary();
+  }, [pageSize, tabKey]);
 
   const handleAllChecked = (e) => {
     const checked = e.target.checked;
@@ -81,6 +105,11 @@ const ShainIchiran = () => {
   const pageSizeChange = (current, size) => {
     console.log("pageSize", current, size);
     setPageSize(size);
+  };
+  //tab 被点击的回调
+  const tabClick = (key, event) => {
+    console.log("tabClick", key, event);
+    setTabKey(key);
   };
 
   //控除設定ポップアップ
@@ -694,7 +723,7 @@ const ShainIchiran = () => {
       </div>
 
       <div>
-        <Tabs defaultActiveKey="1" items={items} />
+        <Tabs items={items} onTabClick={tabClick} />
       </div>
       <Pagination
         total={employees.length}
