@@ -1,39 +1,20 @@
-  /* 検索欄*/
-  .search {
-    text-align: left;
-    /* margin-left: 90px; */
-    font-size: 14px;
-    /* 调整字体大小 */
-    font-weight: 500;
-    /* 调整字体粗细 */
-    font-family: Arial, sans-serif;
-    /* 调整字体类型 */
-    color: rgb(102, 102, 102);
-    /* 调整字体颜色 */
-  }
-
-  /*検索欄DIV*/
-  .margin-bottom-20 {
-    margin-bottom:20px;
-  }
-
-  .search-bar {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 20px;
-    /* 增加输入框和按钮之间的间距 */
+.search-bar {
+  display: flex;
+  white-space: nowrap;
+  justify-content: flex-start;
+  /* 水平居左对齐 */
+  gap: 20px;
 }
 
-  /* 表格标题居中*/
-  .table-center th {
-    text-align: center;
-  }
+/*向下填充20px*/
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
 
-  /* 错误消息样式 */
-  .error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+/* 文本强制居中*/
+.text-center td,th {
+  text-align: center !important;;/* 因为全体布局使用global (.shain-ichiran th,td) 是居左显示 */
+  white-space: nowrap; /* 防止文字换行重叠 */
+  padding: 8px;
+  /* 增加一些内边距以防止内容紧贴边框 */
+}

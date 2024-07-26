@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 import './MgtExpense.css';
 import '../assets/css/global.css';
+import { Pagination } from 'antd';
+
+const showTotal = (total) => ` 合計件数 ${total}`;
 
 const ExpenseList = () => {
   const [employees, setEmployees] = useState([]);
@@ -14,7 +18,7 @@ const ExpenseList = () => {
   const [paramPosition, setParamPosition] = useState('');
   const [businessError, setBusinessError] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
-  // const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSelectAll = (event) => {
     if (event.target.checked) {
@@ -27,7 +31,7 @@ const ExpenseList = () => {
 
   const gotoRqt = () => {
     console.log("gotoRqt");
-    // Navigate('/react/RqtExpense');
+    navigate('/react/RqtExpense');
 
   };
 
@@ -41,7 +45,7 @@ const ExpenseList = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/react/WorkHourList', {
+      const response = await axios.get('http://localhost:8080/react/EmployeeList', {
         params: {
           name: paramName,
           FirstDay: paramFirstDay,
@@ -80,26 +84,26 @@ const ExpenseList = () => {
     <div className="shain-ichiran">
       <h2>経費管理一覧</h2>
       {businessError && <p className="error-message">{businessError}</p>}
-      <div className="margin-bottom-20">
-        <div className='search-label'>
-          <div className="search-fields">
-            <span className='search'>社員ID:</span>
-            <input
-              type="text"
-              placeholder="社員IDを入力してください"
-              value={paramName}
-              onChange={(e) => setParamName(e.target.value)}
-            />
-            <span>社員名:</span><input
-              type="text"
-              placeholder="社員名を入力してください"
-              value={paramName}
-              onChange={(e) => setParamName(e.target.value)}
-            />
-          </div>
+      <div className='search-bar'>
+        <div className="search-fields" >
+          <span className='search-label'>社員ID:</span>
+          <input
+            type="text"
+            placeholder="社員IDを入力してください"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
+          <span className='search-label'>社員名:</span><input
+            type="text"
+            placeholder="社員名を入力してください"
+            value={paramName}
+            onChange={(e) => setParamName(e.target.value)}
+          />
         </div>
-        <div className="search-bar">
-          <span className="search">部門:</span>
+      </div>
+      <div className='search-bar'>
+        <div className="search-fields">
+          <span className='search-label'>部門:</span>
           <select className='search-select'
             value={paramPosition}
             onChange={(e) => setParamPosition(e.target.value)}
@@ -110,7 +114,7 @@ const ExpenseList = () => {
             <option value="3">部門3</option>
           </select>
 
-          <span className="search">職務:</span>
+          <span className='search-label'>職務:</span>
           <select className='search-select'
             value={paramDepartment}
             onChange={(e) => setParamDepartment(e.target.value)}
@@ -121,7 +125,7 @@ const ExpenseList = () => {
             <option value="3">職務3</option>
           </select>
 
-          <span className="search">処理状態:</span>
+          <span className='search-label'>処理状態:</span>
           <select className='search-select'
             value={paramDepartment}
             onChange={(e) => setParamDepartment(e.target.value)}
@@ -134,36 +138,32 @@ const ExpenseList = () => {
             <option value="3">清算済み</option>
           </select>
         </div>
-
-        <div className='search-bar'>
-          <div className='search-fields'>
-            <div className='search-label'>
-              <span className="search">日付指定:</span>
-              <input
-                type="date"
-                placeholder="最初日を選択してください"
-                value={paramFirstDay}
-                onChange={(e) => setParamFirstDay(e.target.value)}
-              /><span>~</span>
-              <input
-                type="date"
-                placeholder="最終日を選択してください"
-                value={paramLastDay}
-                onChange={(e) => setParamLastDay(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-
-
-        <div className='margin-bottom-20'>
-          <button id="btn" onClick={fetchEmployees}>検索</button>
-          <button id="btn" className='margin-left-50' onClick={gotoRqt}>申請</button>
-          <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
+      </div>
+      <div className='search-bar'>
+        <div className='search-fields'>
+          <span className='search-label'>日付指定:</span>
+          <input
+            type="date"
+            placeholder="最初日を選択してください"
+            value={paramFirstDay}
+            onChange={(e) => setParamFirstDay(e.target.value)}
+          /><span>~</span>
+          <input
+            type="date"
+            placeholder="最終日を選択してください"
+            value={paramLastDay}
+            onChange={(e) => setParamLastDay(e.target.value)}
+          />
         </div>
       </div>
-      <div>
-        <table>
+      <div className="search-bar">
+        <button id="btn" onClick={fetchEmployees}>検索</button>
+        <button id="btn" className='margin-left-50' onClick={gotoRqt}>申請</button>
+        <button id="btn" className='margin-left-50' onClick={fetchEmployees}>一括承認</button>
+      </div>
+
+      <div className='margin-bottom-20'>
+        <table className='text-center'>
           <thead>
             <tr>
               <th>
@@ -196,16 +196,16 @@ const ExpenseList = () => {
                   />
                 </td>
 
-                <td>ヤマダ電機</td>
-                <td>ビックカメラ</td>
-                <td>ヨドバシカメラ</td>
-                <td></td>
+                <td>三菱</td>
+                <td>1000</td>
+                <td>1001</td>
+                <td>木村</td>
                 <td>部門1</td>
                 <td>職務1</td>
                 <td>2024-07-23</td>
-                <td>30000</td>
+                <td>40000</td>
                 <td>承認まち</td>
-                <td>30000</td>
+                <td>未清算</td>
                 <td>
                   <button>取り消し</button>
                   <button>承認</button>
@@ -216,10 +216,15 @@ const ExpenseList = () => {
         </table>
       </div>
 
-      <span className='margin-left-20'>合計件数</span>
-      <span className='margin-left-100'>表示件数/頁</span>
-      <span className='margin-left-20'> &lt; 1 2 3... &gt;</span>
-      <span className='margin-left-50'> ( 1 )頁へ</span>
+      <Pagination className='pagination-wrapper' total={employees.length} showSizeChanger showQuickJumper
+        showTotal={(total) => `合計件数 ( ${total} )`}
+        pageSizeOptions={[3, 5, 10]}
+        locale={{
+          items_per_page: "/頁",
+          jump_to: "",
+          jump_to_confirm: "Confirm",
+          page: "頁へ",
+        }} />
     </div>
   );
 };

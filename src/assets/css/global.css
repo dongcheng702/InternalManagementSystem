@@ -56,6 +56,18 @@ body {
   font-family: "Arial", sans-serif;
 }
 
+/* 标签 */
+.search-label {
+  font-size: 14px;
+  /* 调整字体大小 */
+  font-weight: 500;
+  /* 调整字体粗细 */
+  font-family: Arial, sans-serif;
+  /* 调整字体类型 */
+  color: rgb(102, 102, 102);
+  /* 调整字体颜色 */
+}
+
 /* 按钮样式 */
 .shain-ichiran button {
   padding: 10px 20px;
@@ -108,17 +120,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* 标签 */
-.search-label {
-  font-size: 14px;
-  /* 调整字体大小 */
-  font-weight: 500;
-  /* 调整字体粗细 */
-  font-family: Arial, sans-serif;
-  /* 调整字体类型 */
-  color: rgb(102, 102, 102);
-  /* 调整字体颜色 */
-}
+
 
 /*左缩进20*/
 .margin-left-20 {
