@@ -25,6 +25,7 @@ const ShainIchiran = () => {
         setBusinessError(response.data.error);
         setEmployees([]);
       } else {
+        console.log(response.data);
         setEmployees(response.data.results);
         setBusinessError("");
       }
