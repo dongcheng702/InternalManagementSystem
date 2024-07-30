@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Tabs, Checkbox, Col, Row, Pagination, Modal } from "antd";
+import { Tabs, Checkbox, Col, Row, Pagination, Modal, Empty } from "antd";
 
 import { formatCurrency } from "../utils/utils";
 import "./SalaryMgt.css";
@@ -24,7 +24,9 @@ const ShainIchiran = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
   const [tabKey, setTabKey] = useState("2");
-  const [salaryTotal, setSalaryTotal] = useState("2");
+  const [tabTotal, setTabTotal] = useState(0);
+  const [salaryTotal, setSalaryTotal] = useState(0);
+  const [calSalaryTotal, setCalSalaryTotal] = useState(0);
   const [resetFlag, setResetFlag] = useState(false);
   const [shouldResetPage, setShouldResetPage] = useState(false); // 是否重置页码
 
@@ -140,6 +142,10 @@ const ShainIchiran = () => {
     setPage(1);
   }, [shouldResetPage]);
 
+  useEffect(() => {
+    setTabTotal(tabKey === "1" ? calSalaryTotal : salaryTotal);
+  }, [tabKey, calSalaryTotal, salaryTotal]);
+
   const handleAllChecked = (e) => {
     const checked = e.target.checked;
     setAllChecked(checked);
@@ -189,8 +195,9 @@ const ShainIchiran = () => {
     setResetFlag((prevFlag) => !prevFlag);
   };
 
+  // 设置重置页码标识
   const resetToFirstPage = () => {
-    setShouldResetPage((prevFlag) => !prevFlag); // 设置重置页码标识
+    setShouldResetPage((prevFlag) => !prevFlag);
   };
 
   const items = [];
@@ -226,7 +233,7 @@ const ShainIchiran = () => {
               </tr>
             </thead>
             <tbody>
-              {salaryData.map((employee, index) => (
+              {calSalaryData.map((employee, index) => (
                 <React.Fragment key={employee.salary_id}>
                   <tr>
                     <td className="force-center">
@@ -420,6 +427,15 @@ const ShainIchiran = () => {
               ))}
             </tbody>
           </table>
+          <div>
+            {calSalaryData.length === 0 && (
+              <Empty
+                className="margin-top-50 margin-bottom-50"
+                description="データが存在しません"
+              />
+            )}
+          </div>
+
           <div className="button-container">
             <button className="search-button">作成処理</button>
           </div>
@@ -432,211 +448,241 @@ const ShainIchiran = () => {
     key: "2",
     label: "作成済み",
     children: (
-      <table>
-        <thead>
-          <tr>
-            <th className="force-center">社員ID</th>
-            <th className="force-center">社員名</th>
-            <th className="force-center" colSpan="3">
-              勤怠
-            </th>
-            <th className="force-center" colSpan="3">
-              支給
-            </th>
-            <th className="force-center" colSpan="3">
-              控除
-            </th>
-            <th className="force-center" colSpan="2">
-              その他
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {salaryData.map((data, index) => (
-            <React.Fragment key={data.salary_id}>
-              <tr>
-                <td className="force-center font-weight">{data.employee_id}</td>
-                <td className="force-center font-weight">{data.name}</td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      出勤日数:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {data.attendance_days}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      基本給料:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.basic_salary)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      健康保険料:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.health_insurance_premium)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="2"></td>
-              </tr>
-              <tr>
-                <td colSpan="2"></td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      勤務時間:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {data.working_hours}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      残業手当:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.overtime_allowance)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      厚生年金保険料:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.pension_insurance_premium)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="2"></td>
-              </tr>
-              <tr>
-                <td colSpan="5"></td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      住宅手当:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.residential_allowance)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      雇用保険料:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.employment_insurance_premium)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="2"></td>
-              </tr>
-              <tr>
-                <td colSpan="5"></td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      通勤手当:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.transportation_allowance)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      社会保険料合計:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(
-                        data.employment_insurance_premium +
-                          data.pension_insurance_premium +
-                          data.health_insurance_premium
-                      )}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="6"></td>
-              </tr>
-              <tr>
-                <td colSpan="5"></td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      その他手当:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.other_allowance)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title">
-                      源泉所得税:
-                    </Col>
-                    <Col span={9} className="col-data">
-                      {formatCurrency(data.withholding_tax)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3"></td>
-              </tr>
-              <tr>
-                <td colSpan="5"></td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title font-weight">
-                      支払総額:
-                    </Col>
-                    <Col span={9} className="col-data font-weight">
-                      {formatCurrency(data.payment)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title font-weight">
-                      控除額合計:
-                    </Col>
-                    <Col span={9} className="col-data font-weight">
-                      {formatCurrency(data.deduction)}
-                    </Col>
-                  </Row>
-                </td>
-                <td colSpan="3">
-                  <Row>
-                    <Col span={15} className="col-title font-weight">
-                      差引支払額:
-                    </Col>
-                    <Col span={9} className="col-data font-weight">
-                      {formatCurrency(data.total_salary)}
-                    </Col>
-                  </Row>
-                </td>
-              </tr>
-              <tr className="row-border"></tr>
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+      <>
+        <table>
+          <thead>
+            <tr>
+              <th className="force-center">社員ID</th>
+              <th className="force-center">社員名</th>
+              <th className="force-center" colSpan="3">
+                勤怠
+              </th>
+              <th className="force-center" colSpan="3">
+                支給
+              </th>
+              <th className="force-center" colSpan="3">
+                控除
+              </th>
+              <th className="force-center" colSpan="2">
+                その他
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {salaryData.map((data, index) => (
+              <React.Fragment key={data.salary_id}>
+                <tr>
+                  <td className="force-center font-weight">
+                    {data.employee_id}
+                  </td>
+                  <td className="force-center font-weight">{data.name}</td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        出勤日数:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {data.attendance_days}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        基本給料:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.basic_salary)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        健康保険料:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.health_insurance_premium)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="2"></td>
+                </tr>
+                <tr>
+                  <td colSpan="2"></td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        勤務時間:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {data.working_hours}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        残業手当:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.overtime_allowance)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        厚生年金保険料:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.pension_insurance_premium)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="2">
+                    <Row>
+                      <Col span={15} className="col-title font-weight">
+                        給与生成日:
+                      </Col>
+                      <Col span={9} className="col-data font-weight">
+                        {data.payment_date}
+                      </Col>
+                    </Row>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="5"></td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        住宅手当:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.residential_allowance)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        雇用保険料:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.employment_insurance_premium)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="2">
+                    <Row>
+                      <Col span={15} className="col-title font-weight">
+                        給与支給日:
+                      </Col>
+                      <Col span={9} className="col-data font-weight">
+                        {data.payment_issue_date}
+                      </Col>
+                    </Row>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="5"></td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        通勤手当:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.transportation_allowance)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        社会保険料合計:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(
+                          data.employment_insurance_premium +
+                            data.pension_insurance_premium +
+                            data.health_insurance_premium
+                        )}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="2"></td>
+                </tr>
+                <tr>
+                  <td colSpan="5"></td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        その他手当:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.other_allowance)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title">
+                        源泉所得税:
+                      </Col>
+                      <Col span={9} className="col-data">
+                        {formatCurrency(data.withholding_tax)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3"></td>
+                </tr>
+                <tr>
+                  <td colSpan="5"></td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title font-weight">
+                        支払総額:
+                      </Col>
+                      <Col span={9} className="col-data font-weight">
+                        {formatCurrency(data.payment)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title font-weight">
+                        控除額合計:
+                      </Col>
+                      <Col span={9} className="col-data font-weight">
+                        {formatCurrency(data.deduction)}
+                      </Col>
+                    </Row>
+                  </td>
+                  <td colSpan="3">
+                    <Row>
+                      <Col span={15} className="col-title font-weight">
+                        差引支払額:
+                      </Col>
+                      <Col span={9} className="col-data font-weight">
+                        {formatCurrency(data.total_salary)}
+                      </Col>
+                    </Row>
+                  </td>
+                </tr>
+                <tr className="row-border"></tr>
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+        <div>
+          {salaryData.length === 0 && (
+            <Empty
+              className="margin-top-50 margin-bottom-50"
+              description="データが存在しません"
+            />
+          )}
+        </div>
+      </>
     ),
   });
 
@@ -810,13 +856,14 @@ const ShainIchiran = () => {
         <Tabs items={items} onTabClick={tabClick} />
       </div>
       <Pagination
-        total={salaryTotal}
+        total={tabTotal}
         className="pagination-wrapper"
         showSizeChanger
         showQuickJumper
         showTotal={(total) => `合計件数 ( ${total} )`}
         pageSizeOptions={[3, 5, 10]}
         defaultPageSize={3}
+        current={page}
         onChange={pageChange}
         locale={{
           items_per_page: "/頁",

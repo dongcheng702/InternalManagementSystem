@@ -120,8 +120,6 @@ body {
   margin-bottom: 20px;
 }
 
-
-
 /*左缩进20*/
 .margin-left-20 {
   margin-left: 20px;
@@ -135,6 +133,15 @@ body {
 /*左缩进100*/
 .margin-left-100 {
   margin-left: 100px;
+}
+
+/*上缩进50*/
+.margin-top-50 {
+  margin-top: 50px;
+}
+/*下缩进50*/
+.margin-bottom-50 {
+  margin-bottom: 50px;
 }
 
 /*分页居中*/

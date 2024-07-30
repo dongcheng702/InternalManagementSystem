@@ -113,3 +113,10 @@
   background-color: #0056b3;
   color: white;
 }
+
+.tab-content {
+  max-height: 550px; /* 设置内容区域的最大高度 */
+  overflow-y: auto; /* 自动添加垂直滚动条 */
+  padding: 16px;
+  box-sizing: border-box; /* 包括 padding 在内的盒模型 */
+}
