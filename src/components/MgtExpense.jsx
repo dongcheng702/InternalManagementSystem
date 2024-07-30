@@ -18,6 +18,7 @@ const ExpenseList = () => {
   const [paramPosition, setParamPosition] = useState('');
   const [businessError, setBusinessError] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
+  const [expenses, setExpenses] = useState([]);
   const navigate = useNavigate();
 
   const handleSelectAll = (event) => {
@@ -28,6 +29,35 @@ const ExpenseList = () => {
       setSelectedRows([]);
     }
   };
+
+  const fetchExpense = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/MgtExpense/SelectExpense",
+        {
+          params: {
+            test: 1
+          },
+        }
+      );
+
+      if (response.data.error) {
+        console.log("error");
+        setBusinessError(response.data.error);
+        setExpenses([]);
+      } else {
+        console.log(response.data);
+        setExpenses(response.data);
+      }
+
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+    }
+  };
+
+
 
   const gotoRqt = () => {
     console.log("gotoRqt");
@@ -70,6 +100,7 @@ const ExpenseList = () => {
 
   useEffect(() => {
     fetchEmployees();
+    fetchExpense();
   }, []);
 
   if (loading) {
@@ -186,26 +217,26 @@ const ExpenseList = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map(employee => (
-              <tr key={employee.employeeId}>
+            {expenses.map(expense => (
+              <tr key={expense.employee_id}>
                 <td>
                   <input
                     type="checkbox"
-                    onChange={(e) => handleSelectRow(e, employee.employeeId)}
-                    checked={selectedRows.includes(employee.employeeId)}
+                    onChange={(e) => handleSelectRow(e, expense.employee_id)}
+                    checked={selectedRows.includes(expense.employee_id)}
                   />
                 </td>
 
-                <td>三菱</td>
-                <td>1000</td>
-                <td>1001</td>
-                <td>木村</td>
-                <td>部門1</td>
-                <td>職務1</td>
-                <td>2024-07-23</td>
-                <td>40000</td>
-                <td>承認まち</td>
-                <td>未清算</td>
+                <td>{expense.company_name}</td>
+                <td>{expense.expense_application_id}</td>
+                <td>{expense.employee_id}</td>
+                <td>{expense.name}</td>
+                <td>{expense.department}</td>
+                <td>{expense.position}</td>
+                <td>{expense.application_date}</td>
+                <td>{expense.total_amount}</td>
+                <td>{expense.processing_status}</td>
+                <td>{expense.settlement_amount}</td>
                 <td>
                   <button>取り消し</button>
                   <button>承認</button>
@@ -216,8 +247,8 @@ const ExpenseList = () => {
         </table>
       </div>
 
-      <Pagination className='pagination-wrapper' total={employees.length} showSizeChanger showQuickJumper
-        showTotal={ showTotal }
+      <Pagination className='pagination-wrapper' total={expenses.length} showSizeChanger showQuickJumper
+        showTotal={showTotal}
         pageSizeOptions={[3, 5, 10]}
         locale={{
           items_per_page: "/頁",
